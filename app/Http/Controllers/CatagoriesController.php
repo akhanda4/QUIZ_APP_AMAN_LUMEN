@@ -17,8 +17,9 @@ class CatagoriesController extends Controller{
     {   
         $this->CatagoriesModel = new CatagoriesModel;
     }
-    public function getCatagories(Request $request){
-        $this->CatagoriesModel->getCatagories();
+    public function getCatagories(){
+       $catagories =  $this->CatagoriesModel->getCatagories();
+       return $catagories;
     }
     public function addCatagory(Request $request){
         $doc = $request->all();
