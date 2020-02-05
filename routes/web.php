@@ -18,3 +18,7 @@ $router->post('/login',"AdminController@login");
 
 $router->get('/getcatagories',"CatagoriesController@getCatagories");
 $router->post('/addcatagory',"CatagoriesController@addCatagory");
+$router->post('/addsubcatagory',"SubCatagoriesController@addSubCatagory");
+
+//subcatagories
+$router->get('/getcatagoriesfortree',"SubCatagoriesController@getCatagoriesForTree");
