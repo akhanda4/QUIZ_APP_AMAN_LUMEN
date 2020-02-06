@@ -26,6 +26,11 @@ class CatagoriesController extends Controller{
         $response = $this->CatagoriesModel->addCatagory($doc);
         return $response;
     }
+    public function deleteCatagory(Request $request){
+        $catagoryId = $request->add();
+        echo $catagoryId;
+        return;
+    }
 }
 
 

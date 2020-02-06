@@ -17,8 +17,14 @@ $router->post('/login', "AdminController@login");
 
 $router->get('/getcatagories', "CatagoriesController@getCatagories");
 $router->post('/addcatagory', "CatagoriesController@addCatagory");
-$router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
+$router->post('/deletecatagory',"CatagoriesController@deleteCatagory");
 
 //subcatagories
+$router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
 $router->get('/getcatagoriesfortree', "SubCatagoriesController@getCatagoriesForTree");
+$router->post('/getsubcatagoriesforgrid',"SubCatagoriesController@getSubCatagoriesForGrid");
 // $router->post('/addsubcatagory/{catagoryid}')
+
+
+
+$router->get('/getcatagoriesandsubcatagories',"QuestionsController@getTree");

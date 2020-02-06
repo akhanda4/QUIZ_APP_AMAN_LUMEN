@@ -7,26 +7,21 @@
      */
 namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\ObjectID;
 use DB;
-class SubCatagoriesModel extends Eloquent{
+
+class QuestionsModel extends Eloquent{
     public function __construct(){
         $this->DBconnection=DB::connection("mongodb");
-        $this->collection_name = "SubCatagories";
+        $this->collection_name = "Questions";
     }
-    public function addSubCatagories($subCatagoryData){
-        $subCatagoryId = $this->DBconnection
-        ->collection($this->collection_name)
-        ->updateOrInsert($subCatagoryData);
-        echo $subCatagoryId;
-    }
-    public function getCatagoriesForTree(){
-        $catagories = $this->DBconnection
+    public function getTree(){
+        $data = $this->DBconnection
         ->collection("Catagories")
         ->get();
-        return $catagories;
+        return $data;
     }
-    public function getSubCatagoriesForGrid($catagoryId){
+    public function getSubCatagories($catagoryId){
         $subcatagoryList = $this->DBconnection
         ->collection("SubCatagories")
         // ->where('parentCatagoryId',new ObjectId($catagoryId))
