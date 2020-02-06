@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -9,16 +8,17 @@ use Illuminate\Http\Request;
 | It is a breeze. Simply tell Lumen the URIs it should respond to
 | and give it the Closure to call when that URI is requested.
 |
-*/
+ */
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->post('/login',"AdminController@login");
+$router->post('/login', "AdminController@login");
 
-$router->get('/getcatagories',"CatagoriesController@getCatagories");
-$router->post('/addcatagory',"CatagoriesController@addCatagory");
-$router->post('/addsubcatagory',"SubCatagoriesController@addSubCatagory");
+$router->get('/getcatagories', "CatagoriesController@getCatagories");
+$router->post('/addcatagory', "CatagoriesController@addCatagory");
+$router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
 
 //subcatagories
-$router->get('/getcatagoriesfortree',"SubCatagoriesController@getCatagoriesForTree");
+$router->get('/getcatagoriesfortree', "SubCatagoriesController@getCatagoriesForTree");
+// $router->post('/addsubcatagory/{catagoryid}')
