@@ -18,9 +18,11 @@ class SubCatagoriesController extends Controller{
     }
     public function addSubCatagory(Request $request){
         $doc = $request->all();
-        $parentCatagoryId = $doc['parentCatagoryId'];
-        echo $parentCatagoryId;
-        $this->SubCatagoriesModel->addSubCatagories($parentCatagoryId, $doc);
+        if(count($doc)===1){
+            return ("{\"error\":\"Please Select a catagory\"}");
+            die;
+        }
+        $this->SubCatagoriesModel->addSubCatagories($doc);
     }
     public function getCatagoriesForTree(){
        $response = $this->SubCatagoriesModel->getCatagoriesForTree();
@@ -31,6 +33,11 @@ class SubCatagoriesController extends Controller{
             array_push($obj, (object)array("id"=>$id,"label"=>$label));
         }
         return json_encode($obj);
+    }
+    public function getSubCatagoriesForGrid(Request $request){
+        $parentCatagoryId = $request->input("parentCatagoryId");
+        $response = $this->SubCatagoriesModel->getSubCatagoriesForGrid($parentCatagoryId);
+        return $response;
     }
 }
 ?>
