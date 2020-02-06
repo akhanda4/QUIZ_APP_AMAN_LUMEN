@@ -28,3 +28,5 @@ $router->post('/getsubcatagoriesforgrid',"SubCatagoriesController@getSubCatagori
 
 
 $router->get('/getcatagoriesandsubcatagories',"QuestionsController@getTree");
+$router->post('/getquestions',"QuestionsController@getQuestions");
+$router->post('/addquestion',"QuestionsController@addQuestion");

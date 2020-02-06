@@ -26,10 +26,27 @@ class QuestionsController extends Controller{
             //get subcatagories
             $sub_cat = $this->QuestionsModel->getSubCatagories($cat_id);
             foreach ($sub_cat as $sub_arr) {
-                array_push($items, (object)array("label"=>$sub_arr["subcatagory"],"subcat_id"=>(string)$sub_arr["_id"].'-'.(string)$sub_arr["parentCatagoryId"]));
+                array_push($items, (object)array("label"=>$sub_arr["subcatagory"],"id"=>(string)$sub_arr["_id"].'-'.(string)$sub_arr["parentCatagoryId"]));
             }
             array_push($final_array, (object)array("cat_id"=>$cat_id,"label"=>$label,"items"=>$items));
         }
         return json_encode($final_array);
+    }
+    public function getQuestions(Request $request){
+        $id = $request->all();
+        $id = $id['id'];
+        $sub_id = strchr($id,"-",true);
+        $cat_id = strchr($id,"-",false);
+        $cat_id = ltrim($cat_id,"-");
+        $questions = $this->QuestionsModel->getQuestions($cat_id,$sub_id);
+    }
+    public function addQuestion(Request $request){
+        $questiondata = $request->all();
+        $question = $questiondata['question'];
+        $id = $questiondata['id'];
+        $sub_id = strchr($id,"-",true);
+        $cat_id = strchr($id,"-",false);
+        $cat_id = ltrim($cat_id,"-");
+        $response = $this->QuestionsModel->addQuestion($cat_id,$sub_id, $question);
     }
 }

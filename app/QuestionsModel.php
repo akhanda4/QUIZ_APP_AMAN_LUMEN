@@ -29,4 +29,10 @@ class QuestionsModel extends Eloquent{
         ->get();
         return $subcatagoryList;
     }
+    public function addQuestion($cat_id,$sub_id, $question){
+        echo $cat_id .'  '.$sub_id.' '.$question;
+    }
+    public function getQuestions($cat_id,$sub_id){
+        // echo $cat_id .'  '.$sub_id;
+    }
 }
