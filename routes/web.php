@@ -31,5 +31,5 @@ $router->post('/deletesubcatagory', "SubCatagoriesController@deleteSubCatagory")
 $router->get('/getcatagoriesandsubcatagories', "QuestionsController@getTree");
 $router->get('/getquestions', "QuestionsController@getQuestions");
 $router->post('/addquestion', "QuestionsController@addQuestion");
-
+$router->post('/deletequestion',"QuestionsController@deleteQuestion");
 

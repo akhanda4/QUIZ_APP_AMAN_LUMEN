@@ -50,10 +50,18 @@ class QuestionsController extends Controller{
         $sub_id = strchr($id,"-",true);
         $cat_id = strchr($id,"-",false);
         $cat_id = ltrim($cat_id,"-");
+        $correct = $questiondata['options'][3];
+        unset($questiondata['options'][3]);
         unset($questiondata['id']);
         $questiondata['catid'] = $cat_id;
-        $questiondata["subid"] = $sub_id;
+        $questiondata['subid'] = $sub_id;
+        $questiondata['correct'] = $correct;
         $response = $this->QuestionsModel->addQuestion($questiondata);
         return (string)$response;
+    }
+    public function deleteQuestion(Request $request){
+        $data = $request->all();
+        $response = $this->QuestionsModel->deleteQuestion($data);
+        return $data;
     }
 }

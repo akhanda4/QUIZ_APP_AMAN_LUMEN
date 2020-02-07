@@ -49,4 +49,11 @@ class QuestionsModel extends Eloquent
             ->get();
             return $response;
     }
+    public function deleteQuestion($quesId){
+        $response = $this->DBconnection
+            ->collection("Questions")
+            ->where('_id',$quesId['$oid'])
+            ->delete();
+            return $response;
+    }
 }
