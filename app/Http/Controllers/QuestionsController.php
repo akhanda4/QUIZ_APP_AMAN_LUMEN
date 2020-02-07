@@ -39,14 +39,21 @@ class QuestionsController extends Controller{
         $cat_id = strchr($id,"-",false);
         $cat_id = ltrim($cat_id,"-");
         $questions = $this->QuestionsModel->getQuestions($cat_id,$sub_id);
+        return $questions;
     }
     public function addQuestion(Request $request){
+
         $questiondata = $request->all();
         $question = $questiondata['question'];
         $id = $questiondata['id'];
+        $options = $questiondata['options'];
         $sub_id = strchr($id,"-",true);
         $cat_id = strchr($id,"-",false);
         $cat_id = ltrim($cat_id,"-");
-        $response = $this->QuestionsModel->addQuestion($cat_id,$sub_id, $question);
+        unset($questiondata['id']);
+        $questiondata['catid'] = $cat_id;
+        $questiondata["subid"] = $sub_id;
+        $response = $this->QuestionsModel->addQuestion($questiondata);
+        return (string)$response;
     }
 }

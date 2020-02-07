@@ -1,38 +1,52 @@
 <?php
-    /**
-     * This is a modal class
-     *
-     * @author   Aman Kumar
-     * @since    18-01-2020
-     */
+/**
+ * This is a modal class
+ *
+ * @author   Aman Kumar
+ * @since    18-01-2020
+ */
 namespace App;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use MongoDB\BSON\ObjectID;
-use DB;
 
-class QuestionsModel extends Eloquent{
-    public function __construct(){
-        $this->DBconnection=DB::connection("mongodb");
+use DB;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class QuestionsModel extends Eloquent
+{
+    public function __construct()
+    {
+        $this->DBconnection = DB::connection("mongodb");
         $this->collection_name = "Questions";
     }
-    public function getTree(){
+    public function getTree()
+    {
         $data = $this->DBconnection
-        ->collection("Catagories")
-        ->get();
+            ->collection("Catagories")
+            ->get();
         return $data;
     }
-    public function getSubCatagories($catagoryId){
+    public function getSubCatagories($catagoryId)
+    {
         $subcatagoryList = $this->DBconnection
-        ->collection("SubCatagories")
+            ->collection("SubCatagories")
         // ->where('parentCatagoryId',new ObjectId($catagoryId))
-        ->where('parentCatagoryId',$catagoryId)
-        ->get();
+            ->where('parentCatagoryId', $catagoryId)
+            ->get();
         return $subcatagoryList;
     }
-    public function addQuestion($cat_id,$sub_id, $question){
-        echo $cat_id .'  '.$sub_id.' '.$question;
+    public function addQuestion($questiondata)
+    {
+        $response = $this->DBconnection
+            ->collection("Questions")
+            ->insert($questiondata);
+            return $response;
     }
-    public function getQuestions($cat_id,$sub_id){
-        // echo $cat_id .'  '.$sub_id;
+    public function getQuestions($cat_id, $sub_id)
+    {
+        $response = $this->DBconnection
+            ->collection("Questions")
+            ->where('catid',$cat_id)
+            ->where('subid',$sub_id)
+            ->get();
+            return $response;
     }
 }

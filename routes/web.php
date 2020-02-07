@@ -17,16 +17,15 @@ $router->post('/login', "AdminController@login");
 
 $router->get('/getcatagories', "CatagoriesController@getCatagories");
 $router->post('/addcatagory', "CatagoriesController@addCatagory");
-$router->post('/deletecatagory',"CatagoriesController@deleteCatagory");
+$router->post('/deletecatagory', "CatagoriesController@deleteCatagory");
 
 //subcatagories
 $router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
 $router->get('/getcatagoriesfortree', "SubCatagoriesController@getCatagoriesForTree");
-$router->post('/getsubcatagoriesforgrid',"SubCatagoriesController@getSubCatagoriesForGrid");
+$router->post('/getsubcatagoriesforgrid', "SubCatagoriesController@getSubCatagoriesForGrid");
 // $router->post('/addsubcatagory/{catagoryid}')
 
-
-
-$router->get('/getcatagoriesandsubcatagories',"QuestionsController@getTree");
-$router->post('/getquestions',"QuestionsController@getQuestions");
-$router->post('/addquestion',"QuestionsController@addQuestion");
+//questions
+$router->get('/getcatagoriesandsubcatagories', "QuestionsController@getTree");
+$router->get('/getquestions', "QuestionsController@getQuestions");
+$router->post('/addquestion', "QuestionsController@addQuestion");
