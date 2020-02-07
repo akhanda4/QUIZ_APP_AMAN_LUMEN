@@ -7,7 +7,7 @@
      */
 namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use MongoDB\BSON\ObjectID;
+use MongoDB\BSON\ObjectId;
 use DB;
 
 class CatagoriesModel extends Eloquent{
@@ -32,6 +32,26 @@ class CatagoriesModel extends Eloquent{
         ->collection($this->collection_name)
         ->where('_id',$catagoryId)
         ->update($subCatagoryData);
+    }
+    public function deleteCatagory($catid){
+        $resArr = array();
+        $catid = $catid['$oid'];
+        $catResponse = DB::connection("mongodb")
+        ->collection("Catagories")
+        ->where('_id',new ObjectId($catid))
+        ->delete();
+        array_push($resArr,(object)array($catResponse));
+        $subResponse = DB::connection("mongodb")
+        ->collection("SubCatagories")
+        ->where('parentCatagoryId',$catid)
+        ->delete();
+        array_push($resArr,(object)array($subResponse));
+        $quesResponse = DB::connection("mongodb")
+        ->collection("Questions")
+        ->where('catid',$catid)
+        ->delete();
+        array_push($resArr,(object)array($quesResponse));
+        return $resArr;
     }
 }
 

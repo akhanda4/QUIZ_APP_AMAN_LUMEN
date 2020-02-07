@@ -27,11 +27,10 @@ class CatagoriesController extends Controller{
         return $response;
     }
     public function deleteCatagory(Request $request){
-        $catagoryId = $request->add();
-        echo $catagoryId;
-        return;
+        $catagorydata = $request->all();
+        $catid = $catagorydata['_id'];
+        $response = $this->CatagoriesModel->deleteCatagory($catid);
+        return $response;
     }
 }
-
-
 ?>
