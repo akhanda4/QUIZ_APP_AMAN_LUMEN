@@ -39,5 +39,11 @@ class SubCatagoriesController extends Controller{
         $response = $this->SubCatagoriesModel->getSubCatagoriesForGrid($parentCatagoryId);
         return $response;
     }
+    public function deleteSubCatagory(Request $request){
+        $data = $request->all();
+        $subcatid = $data['_id'];
+        $response = $this->SubCatagoriesModel->deleteSubCatagory($subcatid);
+        return $response;
+    }
 }
 ?>

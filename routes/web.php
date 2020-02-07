@@ -24,6 +24,7 @@ $router->post('/editcatagory',"CatagoriesController@editCatagory");
 $router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
 $router->get('/getcatagoriesfortree', "SubCatagoriesController@getCatagoriesForTree");
 $router->post('/getsubcatagoriesforgrid', "SubCatagoriesController@getSubCatagoriesForGrid");
+$router->post('/deletesubcatagory', "SubCatagoriesController@deleteSubCatagory");
 // $router->post('/addsubcatagory/{catagoryid}')
 
 //questions

@@ -34,4 +34,19 @@ class SubCatagoriesModel extends Eloquent{
         ->get();
         return $subcatagoryList;
     }
+    public function deleteSubCatagory($subcatid){
+        $resArr = array();
+        $subResponse = DB::connection("mongodb")
+        ->collection("SubCatagories")
+        ->where('_id',$subcatid['$oid'])
+        ->delete();
+        array_push($resArr,(object)array($subResponse));
+
+        $quesResponse = DB::connection("mongodb")
+        ->collection("Questions")
+        ->where('catid',$subcatid['$oid'])
+        ->delete();
+        array_push($resArr,(object)array($quesResponse));
+        return $resArr;
+    }
 }
