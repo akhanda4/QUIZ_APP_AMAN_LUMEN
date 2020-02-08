@@ -9,7 +9,8 @@ namespace App;
 
 use DB;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-
+// use MongoDB\BSON\toJSON;
+use MongoDB\BSON\ObjectId;
 class QuestionsModel extends Eloquent
 {
     public function __construct()
@@ -42,11 +43,14 @@ class QuestionsModel extends Eloquent
     }
     public function getQuestions($cat_id, $sub_id)
     {
+        $collection = "Questions";
         $response = $this->DBconnection
             ->collection("Questions")
             ->where('catid',$cat_id)
             ->where('subid',$sub_id)
-            ->get();
+            ->get()
+            ->shuffle()
+            ->take(10);
             return $response;
     }
     public function deleteQuestion($quesId){
