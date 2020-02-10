@@ -41,12 +41,22 @@ class SubCatagoriesModel extends Eloquent{
         ->where('_id',$subcatid['$oid'])
         ->delete();
         array_push($resArr,(object)array($subResponse));
-
         $quesResponse = DB::connection("mongodb")
         ->collection("Questions")
         ->where('catid',$subcatid['$oid'])
         ->delete();
         array_push($resArr,(object)array($quesResponse));
         return $resArr;
+    }
+    public function updateSubCatagory($data){
+        $_id = $data['_id'];
+        $parentCatagoryId = $data['parentCatagoryId'];
+        $subcatagory = $data['subcatagory'];
+        $response = DB::connection("mongodb")
+        ->collection("SubCatagories")
+        ->where('_id',$_id)
+        ->where('parentCatagoryId',$parentCatagoryId)
+        ->update(['subcatagory'=>$subcatagory]);
+        return $response;
     }
 }

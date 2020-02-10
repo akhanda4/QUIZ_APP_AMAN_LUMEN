@@ -60,4 +60,17 @@ class QuestionsModel extends Eloquent
             ->delete();
             return $response;
     }
+    public function updateQuestion($data){
+        $id = $data['_id'];
+        $question = $data['question'];
+        $correct = $data['options'][3];
+        unset ($data['options'][3]);
+        $options = $data['options'];
+        $response = $this->DBconnection
+            ->collection("Questions")
+            ->where('_id',$id)
+            ->update(['question'=>$question,'correct' =>$correct,'options'=>$options]);
+        return $response;
+
+    }
 }

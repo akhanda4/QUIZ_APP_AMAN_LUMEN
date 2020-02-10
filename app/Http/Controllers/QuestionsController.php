@@ -46,7 +46,6 @@ class QuestionsController extends Controller{
         return $questions;
     }
     public function addQuestion(Request $request){
-
         $questiondata = $request->all();
         $question = $questiondata['question'];
         $id = $questiondata['id'];
@@ -67,5 +66,10 @@ class QuestionsController extends Controller{
         $data = $request->all();
         $response = $this->QuestionsModel->deleteQuestion($data);
         return $data;
+    }
+    public function updateQuestion(Request $request){
+        $questiondata = $request->all();
+        $response = $this->QuestionsModel->updateQuestion($questiondata);
+        return $response;
     }
 }

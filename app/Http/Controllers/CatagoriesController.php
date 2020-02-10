@@ -32,5 +32,10 @@ class CatagoriesController extends Controller{
         $response = $this->CatagoriesModel->deleteCatagory($catid);
         return $response;
     }
+    public function updateCatagory(Request $request){
+        $data = $request->all();
+        $response = $this->CatagoriesModel->updateCatagory($data);
+        return $response;
+    }
 }
 ?>

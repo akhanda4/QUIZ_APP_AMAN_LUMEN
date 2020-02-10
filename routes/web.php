@@ -18,13 +18,14 @@ $router->post('/login', "AdminController@login");
 $router->get('/getcatagories', "CatagoriesController@getCatagories");
 $router->post('/addcatagory', "CatagoriesController@addCatagory");
 $router->post('/deletecatagory', "CatagoriesController@deleteCatagory");
-$router->post('/editcatagory',"CatagoriesController@editCatagory");
+$router->put('/updatecatagory',"CatagoriesController@updateCatagory");
 
 //subcatagories
 $router->post('/addsubcatagory', "SubCatagoriesController@addSubCatagory");
 $router->get('/getcatagoriesfortree', "SubCatagoriesController@getCatagoriesForTree");
 $router->post('/getsubcatagoriesforgrid', "SubCatagoriesController@getSubCatagoriesForGrid");
 $router->post('/deletesubcatagory', "SubCatagoriesController@deleteSubCatagory");
+$router->put('/updatesubcatagory',"SubCatagoriesController@updateSubCatagory");
 // $router->post('/addsubcatagory/{catagoryid}')
 
 //questions
@@ -32,4 +33,4 @@ $router->get('/getcatagoriesandsubcatagories', "QuestionsController@getTree");
 $router->get('/getquestions', "QuestionsController@getQuestions");
 $router->post('/addquestion', "QuestionsController@addQuestion");
 $router->post('/deletequestion',"QuestionsController@deleteQuestion");
-
+$router->put('/updatequestion',"QuestionsController@updateQuestion");

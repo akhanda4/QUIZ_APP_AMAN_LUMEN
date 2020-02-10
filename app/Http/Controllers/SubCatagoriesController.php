@@ -45,5 +45,10 @@ class SubCatagoriesController extends Controller{
         $response = $this->SubCatagoriesModel->deleteSubCatagory($subcatid);
         return $response;
     }
+    public function updateSubCatagory(Request $request){
+        $data = $request->all();
+        $response = $this->SubCatagoriesModel->updateSubCatagory($data);
+        return $response;
+    }
 }
 ?>

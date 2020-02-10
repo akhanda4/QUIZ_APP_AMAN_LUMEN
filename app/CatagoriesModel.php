@@ -53,6 +53,14 @@ class CatagoriesModel extends Eloquent{
         array_push($resArr,(object)array($quesResponse));
         return $resArr;
     }
+    public function updateCatagory($data){
+        $catagory = $data['catagory'];
+        $response = $this->DBconnection
+        ->collection("Catagories")
+        ->where('_id',$data['_id'])
+        ->update(['catagory'=>$catagory]);
+        return $response;
+    }
 }
 
 ?>
