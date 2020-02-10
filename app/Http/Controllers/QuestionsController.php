@@ -39,6 +39,10 @@ class QuestionsController extends Controller{
         $cat_id = strchr($id,"-",false);
         $cat_id = ltrim($cat_id,"-");
         $questions = $this->QuestionsModel->getQuestions($cat_id,$sub_id);
+        $questions->map(function ($object) { 
+            $object['question'] = str_replace('&#039;', ' \' ',htmlspecialchars_decode(html_entity_decode($object['question'])));
+        });
+        
         return $questions;
     }
     public function addQuestion(Request $request){
