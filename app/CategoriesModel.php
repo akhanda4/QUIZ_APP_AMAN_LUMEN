@@ -10,40 +10,40 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use MongoDB\BSON\ObjectId;
 use DB;
 
-class CatagoriesModel extends Eloquent{
+class CategoriesModel extends Eloquent{
     public function __construct(){
         $this->DBconnection=DB::connection("mongodb");
-        $this->collection_name = "Catagories";
+        $this->collection_name = "Categories";
     }
-    public function getCatagories(){
-        $catagories = $this->DBconnection
+    public function getCategories(){
+        $categories = $this->DBconnection
         ->collection($this->collection_name)
         ->get();
-        return $catagories;
+        return $categories;
     }
-    public function addCatagory($catagoryData){
+    public function addCategory($categoryData){
         $response = $this->DBconnection
         ->collection($this->collection_name)
-        ->updateOrInsert($catagoryData);
+        ->updateOrInsert($categoryData);
         return (string)$response;
     }
-    public function addSubCatagories($catagoryId, $subCatagoryData){
+    public function addSubCategories($categoryId, $subCategoryData){
         $response = $this->DBconnection
         ->collection($this->collection_name)
-        ->where('_id',$catagoryId)
-        ->update($subCatagoryData);
+        ->where('_id',$categoryId)
+        ->update($subCategoryData);
     }
-    public function deleteCatagory($catid){
+    public function deleteCategory($catid){
         $resArr = array();
         $catid = $catid['$oid'];
         $catResponse = DB::connection("mongodb")
-        ->collection("Catagories")
+        ->collection("Categories")
         ->where('_id',new ObjectId($catid))
         ->delete();
         array_push($resArr,(object)array($catResponse));
         $subResponse = DB::connection("mongodb")
-        ->collection("SubCatagories")
-        ->where('parentCatagoryId',$catid)
+        ->collection("SubCategories")
+        ->where('parentCategoryId',$catid)
         ->delete();
         array_push($resArr,(object)array($subResponse));
         $quesResponse = DB::connection("mongodb")
@@ -53,12 +53,12 @@ class CatagoriesModel extends Eloquent{
         array_push($resArr,(object)array($quesResponse));
         return $resArr;
     }
-    public function updateCatagory($data){
-        $catagory = $data['catagory'];
+    public function updateCategory($data){
+        $category = $data['category'];
         $response = $this->DBconnection
-        ->collection("Catagories")
+        ->collection("Categories")
         ->where('_id',$data['_id'])
-        ->update(['catagory'=>$catagory]);
+        ->update(['category'=>$category]);
         return $response;
     }
 }

@@ -21,18 +21,18 @@ class QuestionsModel extends Eloquent
     public function getTree()
     {
         $data = $this->DBconnection
-            ->collection("Catagories")
+            ->collection("Categories")
             ->get();
         return $data;
     }
-    public function getSubCatagories($catagoryId)
+    public function getSubCategories($categoryId)
     {
-        $subcatagoryList = $this->DBconnection
-            ->collection("SubCatagories")
-        // ->where('parentCatagoryId',new ObjectId($catagoryId))
-            ->where('parentCatagoryId', $catagoryId)
+        $subcategoryList = $this->DBconnection
+            ->collection("SubCategories")
+        // ->where('parentCategoryId',new ObjectId($categoryId))
+            ->where('parentCategoryId', $categoryId)
             ->get();
-        return $subcatagoryList;
+        return $subcategoryList;
     }
     public function addQuestion($questiondata)
     {

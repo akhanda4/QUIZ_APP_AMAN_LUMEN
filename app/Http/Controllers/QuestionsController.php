@@ -22,11 +22,11 @@ class QuestionsController extends Controller{
        foreach($tree as $arr){
             $items = array();
             $cat_id = (string)$arr['_id'];
-            $label = $arr['catagory'];
-            //get subcatagories
-            $sub_cat = $this->QuestionsModel->getSubCatagories($cat_id);
+            $label = $arr['category'];
+            //get subcategories
+            $sub_cat = $this->QuestionsModel->getSubCategories($cat_id);
             foreach ($sub_cat as $sub_arr) {
-                array_push($items, (object)array("label"=>$sub_arr["subcatagory"],"id"=>(string)$sub_arr["_id"].'-'.(string)$sub_arr["parentCatagoryId"]));
+                array_push($items, (object)array("label"=>$sub_arr["subcategory"],"id"=>(string)$sub_arr["_id"].'-'.(string)$sub_arr["parentCategoryId"]));
             }
             array_push($final_array, (object)array("cat_id"=>$cat_id,"label"=>$label,"items"=>$items));
         }
