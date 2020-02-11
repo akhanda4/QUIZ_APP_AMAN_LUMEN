@@ -26,14 +26,6 @@ class AdminController extends Controller
         $this->AdminModel = new AdminModel;
     }
     public function login(Request $request){
-        // Validator::make($request->all(), [
-        //     'email' => 'bail|required|email',
-        //     'password' => 'bail|required|min:7'
-        // ])->validate();
-        // $this->validate($request, [
-        //     'email' => 'bail|required|email',
-        //     'password' => 'bail|required|min:7'
-        // ]);
             $validator = Validator::make($request->all(), [
                 'email' => 'bail|required|email',
                 'password' => 'bail|required|min:7'
@@ -58,8 +50,5 @@ class AdminController extends Controller
         return [
             'response' => 'Logged in'
         ] ;
-    }
-    public function messages(){
-        
     }
 }
